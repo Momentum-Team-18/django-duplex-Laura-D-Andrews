@@ -25,5 +25,5 @@ class Card(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     deck = models.ForeignKey(to=Deck, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.question
+    # def __str__(self):
+    #     return self.question
