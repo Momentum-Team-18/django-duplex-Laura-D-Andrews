@@ -1,6 +1,7 @@
 from .models import Card, Deck, User
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AddCardForm
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -45,6 +46,12 @@ def edit_card(request, pk):
     return render(request, 'flashcards/edit_card.html', {'form': form})
 
 
-def delete_card(request, id):
-    card = Card.objects.get(pk=id)
+def card_detail(request, pk):
+    card = get_object_or_404(Card, pk=pk)
+    return render(request, 'flashcards/card_detail.html', {'card': card})
+
+
+def delete_card(request, pk):
+    card = Card.objects.get(id=pk)
     card.delete()
+    return redirect('home')
